@@ -3,64 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
   <title>Rukayatu Seidu — Junior Front-End Developer</title>
+  <meta name="description" content="Portfolio of Rukayatu Seidu, Junior Front-End Developer based in Barcelona. React, JavaScript, Tailwind CSS and Java. Seven projects built during the Factoria F5 &amp; FemCoders bootcamp.">
+  <link rel="canonical" href="https://rseidu941-commits.github.io/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rukayatu Seidu">
+  <meta property="og:title" content="Rukayatu Seidu — Junior Front-End Developer">
+  <meta property="og:description" content="I build accessible, user-friendly web applications with clean code and thoughtful design. Transitioning from nutrition and public health to tech.">
+  <meta property="og:url" content="https://rseidu941-commits.github.io/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Rukayatu Seidu — Junior Front-End Developer">
+  <meta name="twitter:description" content="I build accessible, user-friendly web applications with clean code and thoughtful design.">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%236c5ce7'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='58' font-weight='700' fill='white' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <noscript>
+    <style>
+      .hero{display:flex !important}
+      .section,.projects-section{display:block !important}
+      .nav-toggle{display:none !important}
+      .nav-links{display:flex !important;position:static !important;flex-direction:row !important;background:none !important;padding:0 !important;border:none !important}
+      .panel{animation:none !important}
+    </style>
+  </noscript>
+
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     :root{
       --bg:#0b0d17;--bg2:#111328;--card:#161833;--card-hover:#1c1f42;
       --border:#252850;--border-light:#2f3366;
-      --text:#e8e8f0;--text2:#a0a3c0;--text3:#6b6f90;
+      --text:#e8e8f0;--text2:#a0a3c0;--text3:#9498bd;
       --accent:#6c5ce7;--accent-light:#a29bfe;--accent-glow:rgba(108,92,231,0.25);
       --green:#00cec9;--green-glow:rgba(0,206,201,0.2);
       --purple:#a855f7;--purple-glow:rgba(168,85,247,0.2);
+      --danger:#ff7675;--danger-glow:rgba(255,118,117,0.12);
       --gradient:linear-gradient(135deg,#6c5ce7,#a29bfe);
+      color-scheme:dark;
     }
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;scroll-padding-top:96px}
     body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+    :focus-visible{outline:2px solid var(--accent-light);outline-offset:3px;border-radius:6px}
 
-    .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(11,13,23,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(37,40,80,0.5);transition:all .3s}
-    .nav-logo{font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none}.nav-logo span{color:var(--accent-light)}
+    .skip-link{position:absolute;left:-9999px;top:0;z-index:2000;padding:.75rem 1.25rem;background:var(--accent);color:#fff;font-weight:600;border-radius:0 0 12px 0;text-decoration:none}
+    .skip-link:focus{left:0}
+
+    .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(11,13,23,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(37,40,80,0.5);transition:all .3s}
+    .nav-logo{font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none;background:none;border:none;cursor:pointer;font-family:inherit;line-height:1.7}.nav-logo span{color:var(--accent-light)}
     .nav-links{display:flex;gap:2rem;list-style:none}
-    .nav-links a{font-size:.875rem;font-weight:500;color:var(--text2);text-decoration:none;transition:color .3s;position:relative}
+    .nav-links a{font-size:.875rem;font-weight:500;color:var(--text2);text-decoration:none;transition:color .3s;position:relative;padding:.25rem 0}
     .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gradient);transition:width .3s}
     .nav-links a:hover{color:var(--text)}.nav-links a:hover::after{width:100%}
+    .nav-links a.active{color:var(--text)}
+    .nav-links a.active::after{width:100%}
     .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:5px}
     .nav-toggle span{width:25px;height:2px;background:var(--text);transition:all .3s}
 
-    .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;overflow:hidden}
+    /* ---------- page panels ---------- */
+    .panel{display:none}
+    .panel.is-active{display:block;animation:panelIn .45s cubic-bezier(0.16,1,0.3,1)}
+    .hero.is-active{display:flex}
+    .panel:focus{outline:none}
+    @keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+    .hero{position:relative;min-height:100vh;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;overflow:hidden}
     .hero-bg{position:absolute;inset:0;z-index:0}
     #constellation{position:absolute;inset:0;width:100%;height:100%}
     .hero-gradient{position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to top,var(--bg),transparent);z-index:1}
     .hero-content{position:relative;z-index:2;max-width:800px}
     .hero-greeting{font-size:.875rem;font-weight:500;color:var(--accent-light);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
     .hero-title{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;line-height:1.1;margin-bottom:1rem;letter-spacing:-.03em}
-    .hero-title span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-title span{background:var(--gradient);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
     .hero-role{font-size:clamp(1rem,2vw,1.25rem);font-weight:400;color:var(--text2);margin-bottom:1.5rem}
     .hero-desc{font-size:1rem;color:var(--text3);max-width:550px;margin:0 auto 2.5rem;line-height:1.8}
-    .hero-buttons{display:flex;gap:1rem;justify-content:center;margin-bottom:2.5rem}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;font-size:.9rem;font-weight:600;padding:.85rem 1.75rem;border-radius:12px;text-decoration:none;cursor:pointer;border:none;transition:all .3s}
+    .hero-buttons{display:flex;gap:1rem;justify-content:center;margin-bottom:2.5rem;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;font-size:.9rem;font-weight:600;padding:.85rem 1.75rem;border-radius:12px;text-decoration:none;cursor:pointer;border:none;transition:all .3s;font-family:inherit}
     .btn-primary{background:var(--gradient);color:#fff;box-shadow:0 4px 20px var(--accent-glow)}
     .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow)}
+    .btn-primary:disabled{opacity:.65;cursor:not-allowed;transform:none}
     .btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border-light)}
     .btn-outline:hover{border-color:var(--accent);background:rgba(108,92,231,0.08)}
     .btn-sm{font-size:.8rem;padding:.6rem 1.2rem;border-radius:10px}
-    .hero-social{display:flex;gap:.75rem;justify-content:center}
+    .btn-spinner{width:15px;height:15px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none}
+    .btn.is-loading .btn-spinner{display:inline-block}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .hero-social{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
     .social-link{display:flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:500;color:var(--text3);text-decoration:none;padding:.5rem 1rem;border-radius:8px;border:1px solid var(--border);transition:all .3s}
     .social-link:hover{color:var(--text);border-color:var(--accent);background:rgba(108,92,231,0.08)}
     .social-link svg{width:16px;height:16px}
 
-    .section{padding:5rem 2rem;max-width:1100px;margin:0 auto;max-height:0;overflow:hidden;opacity:0;transition:max-height .6s cubic-bezier(0.16,1,0.3,1),opacity .5s ease,padding .5s ease}
-    .section.visible{max-height:3000px;opacity:1}
-    .projects-section{max-height:0;overflow:hidden;opacity:0;transition:max-height .6s cubic-bezier(0.16,1,0.3,1),opacity .5s ease,padding .5s ease}
-    .projects-section.visible{max-height:8000px;opacity:1}
-    .section-divider{max-height:0;opacity:0;transition:max-height .4s ease,opacity .4s ease}
-    .section-divider.visible{max-height:10px;opacity:1}
+    .section{padding:7rem 2rem 5rem;max-width:1100px;margin:0 auto}
     .section-label{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-light);background:var(--accent-glow);padding:.3rem .9rem;border-radius:100px;margin-bottom:1rem}
     .section-title{font-size:clamp(1.75rem,4vw,2.25rem);font-weight:700;margin-bottom:1rem;letter-spacing:-.02em}
-    .section-title span{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section-title span{background:var(--gradient);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
     .section-subtitle{font-size:1rem;color:var(--text2);max-width:600px;margin-bottom:3rem}
 
     .about-content{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
@@ -69,7 +109,7 @@
     .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
     .stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;text-align:center;transition:all .3s}
     .stat-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-    .stat-number{font-size:1.75rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.25rem}
+    .stat-number{font-size:1.75rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.25rem}
     .stat-label{font-size:.75rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
 
     .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem}
@@ -79,7 +119,7 @@
     .skill-name{font-size:.8rem;font-weight:600;color:var(--text)}
     .skill-category{font-size:.65rem;color:var(--text3);margin-top:.25rem}
 
-    .projects-section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+    .projects-section{padding:7rem 2rem 5rem;max-width:1200px;margin:0 auto}
     .featured-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-bottom:4rem}
     .project-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .4s cubic-bezier(0.16,1,0.3,1)}
     .project-card:hover{transform:translateY(-4px);border-color:var(--border-light);box-shadow:0 20px 60px rgba(0,0,0,0.4)}
@@ -90,7 +130,7 @@
     .project-card--featured:hover .card-preview::before{opacity:1}
     .preview-icon{width:100px;height:100px;border-radius:18px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;z-index:1;transition:all .4s}
     .project-card--featured:hover .preview-icon{transform:scale(1.05)}
-    .preview-badge{position:absolute;top:1.25rem;left:1.25rem;display:flex;gap:.5rem;z-index:2}
+    .preview-badge{position:absolute;top:1.25rem;left:1.25rem;display:flex;gap:.5rem;z-index:2;flex-wrap:wrap}
     .badge{font-size:.65rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px}
     .badge--individual{background:var(--green-glow);color:var(--green);border:1px solid rgba(0,206,201,0.3)}
     .badge--collaborative{background:var(--purple-glow);color:var(--purple);border:1px solid rgba(168,85,247,0.3)}
@@ -108,7 +148,7 @@
     .features-list li::before{content:'';position:absolute;left:0;top:.55rem;width:5px;height:5px;border-radius:50%;background:var(--accent)}
     .contribution{font-size:.8rem;color:var(--text3);padding:.75rem 1rem;background:var(--bg2);border-radius:10px;border-left:3px solid var(--green);margin-bottom:1.25rem}
     .contribution strong{color:var(--green)}
-    .card-actions{display:flex;gap:.75rem}
+    .card-actions{display:flex;gap:.75rem;flex-wrap:wrap}
 
     .collab-header{text-align:center;margin-bottom:2rem}
     .collab-title{font-size:clamp(1.25rem,3vw,1.5rem);font-weight:600;margin-bottom:.25rem}
@@ -143,74 +183,88 @@
     .contact-link-icon svg{width:18px;height:18px;color:var(--accent-light)}
     .contact-link-text{font-size:.85rem}
     .contact-link-label{font-size:.7rem;color:var(--text3)}
+
     .contact-form{display:flex;flex-direction:column;gap:1rem}
     .form-group{display:flex;flex-direction:column;gap:.4rem}
     .form-group label{font-size:.75rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em}
-    .form-group input,.form-group textarea{padding:.85rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:.9rem;transition:border-color .3s;outline:none}
+    .form-group input,.form-group textarea{padding:.85rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:.9rem;transition:border-color .3s;outline:none;width:100%}
     .form-group input:focus,.form-group textarea:focus{border-color:var(--accent)}
     .form-group textarea{min-height:120px;resize:vertical}
+    .form-group .field-error{font-size:.75rem;color:var(--danger);min-height:1em}
+    .form-group.has-error input,.form-group.has-error textarea{border-color:var(--danger)}
+    .form-status{padding:.75rem 1rem;border-radius:10px;font-size:.85rem;display:none}
+    .form-status.is-success{display:block;background:var(--green-glow);border:1px solid rgba(0,206,201,.35);color:var(--green)}
+    .form-status.is-error{display:block;background:var(--danger-glow);border:1px solid rgba(255,118,117,.35);color:var(--danger)}
 
     .footer{border-top:1px solid var(--border);padding:2rem;text-align:center}
-    .footer-content{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .footer-content{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
     .footer-text{font-size:.8rem;color:var(--text3)}
     .footer-social{display:flex;gap:.75rem}
     .footer-social a{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:1px solid var(--border);color:var(--text3);text-decoration:none;transition:all .3s}
     .footer-social a:hover{border-color:var(--accent);color:var(--accent-light);background:var(--accent-glow)}
     .footer-social a svg{width:16px;height:16px}
-    .section-divider{border:none;height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);max-width:1100px;margin:0 auto}
 
     @media(max-width:1024px){.project-card--featured{grid-template-columns:1fr;min-height:auto}.card-preview{min-height:180px}.collab-grid{grid-template-columns:repeat(2,1fr)}.about-content{grid-template-columns:1fr}}
-    @media(max-width:768px){.nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(11,13,23,0.98);padding:1.5rem;border-bottom:1px solid var(--border);gap:1rem}.nav-links.active{display:flex}.nav-toggle{display:flex}.hero-buttons{flex-direction:column;align-items:center}.hero-social{flex-direction:column;align-items:center}.features-list{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}.footer-content{flex-direction:column;gap:1rem}}
-    @media(max-width:640px){.collab-grid{grid-template-columns:1fr}.about-stats{grid-template-columns:1fr}.skills-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:768px){.nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(11,13,23,0.98);padding:1.5rem;border-bottom:1px solid var(--border);gap:1rem}.nav-links.open{display:flex}.nav-toggle{display:flex}.hero-buttons{flex-direction:column;align-items:center}.hero-social{flex-direction:column;align-items:center}.features-list{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}}
+    @media(max-width:640px){.collab-grid{grid-template-columns:1fr}.about-stats{grid-template-columns:1fr}.skills-grid{grid-template-columns:repeat(2,1fr)}}
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+    }
   </style>
 </head>
 <body>
 
-<nav class="navbar" id="navbar">
-  <a href="#" class="nav-logo">Rukayatu<span>.</span></a>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<nav class="navbar" id="navbar" aria-label="Main">
+  <button class="nav-logo" id="homeButton" type="button" aria-label="Go to home page">Rukayatu<span>.</span></button>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about" data-goto="about">About</a></li>
+    <li><a href="#skills" data-goto="skills">Skills</a></li>
+    <li><a href="#projects" data-goto="projects">Projects</a></li>
+    <li><a href="#contact" data-goto="contact">Contact</a></li>
   </ul>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<section class="hero" id="hero">
-  <div class="hero-bg"><canvas id="constellation"></canvas></div>
-  <div class="hero-gradient"></div>
+<main id="main">
+
+<section class="hero panel is-active" id="hero" tabindex="-1">
+  <div class="hero-bg"><canvas id="constellation" aria-hidden="true"></canvas></div>
+  <div class="hero-gradient" aria-hidden="true"></div>
   <div class="hero-content">
     <p class="hero-greeting">Hello, welcome to my world</p>
     <h1 class="hero-title">Hi, I'm <span>Rukayatu Seidu</span></h1>
     <p class="hero-role">Junior Front-End Developer</p>
     <p class="hero-desc">I build accessible, user-friendly web applications with clean code and thoughtful design. Transitioning from nutrition and public health to tech.</p>
     <div class="hero-buttons">
-      <a href="#contact" class="btn btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <button type="button" class="btn btn-primary" data-goto="contact">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         Get in touch
-      </a>
-      <a href="#projects" class="btn btn-outline">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </button>
+      <button type="button" class="btn btn-outline" data-goto="projects">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         View work
-      </a>
+      </button>
     </div>
     <div class="hero-social">
       <a href="https://www.linkedin.com/in/rukayatu-seidu-55b88a381/" target="_blank" rel="noopener noreferrer" class="social-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
       </a>
       <a href="https://github.com/rseidu941-commits" target="_blank" rel="noopener noreferrer" class="social-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
         GitHub
       </a>
     </div>
   </div>
 </section>
 
-<section class="section" id="about">
+<section class="section panel" id="about" tabindex="-1">
   <span class="section-label">About Me</span>
   <h2 class="section-title">A bit <span>about me</span></h2>
   <p class="section-subtitle">Combining analytical thinking from public health with creative problem-solving in tech.</p>
@@ -220,7 +274,7 @@
       <p>I possess strong communication, problem-solving, documentation, and interdisciplinary collaboration skills, with a proven ability to <strong>translate user needs into practical and user-friendly solutions</strong>.</p>
       <p>My journey from public health to tech has equipped me with a unique perspective on user-centered design and accessibility, ensuring the applications I build serve real people effectively.</p>
     </div>
-<div class="about-stats">
+    <div class="about-stats">
       <div class="stat-card"><div class="stat-number">7</div><div class="stat-label">Projects Completed</div></div>
       <div class="stat-card"><div class="stat-number">2</div><div class="stat-label">Individual Projects</div></div>
       <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">Team Projects</div></div>
@@ -229,9 +283,7 @@
   </div>
 </section>
 
-<hr class="section-divider">
-
-<section class="section" id="skills">
+<section class="section panel" id="skills" tabindex="-1">
   <span class="section-label">Skills</span>
   <h2 class="section-title">My <span>tech stack</span></h2>
   <p class="section-subtitle">Technologies and tools I work with to build modern web applications.</p>
@@ -247,17 +299,11 @@
     <div class="skill-card"><div class="skill-icon">&#128279;</div><div class="skill-name">React Router</div><div class="skill-category">Routing</div></div>
     <div class="skill-card"><div class="skill-icon">&#128268;</div><div class="skill-name">REST APIs</div><div class="skill-category">Integration</div></div>
     <div class="skill-card"><div class="skill-icon">&#128241;</div><div class="skill-name">Responsive</div><div class="skill-category">Design</div></div>
-<div class="skill-card"><div class="skill-icon">&#9783;</div><div class="skill-name">Sass</div><div class="skill-category">Preprocessor</div></div>
-    <div class="skill-card"><div class="skill-icon">&#9749;</div><div class="skill-name">Java</div><div class="skill-category">Programming</div></div>
-    <div class="skill-card"><div class="skill-icon">&#128024;</div><div class="skill-name">PostgreSQL</div><div class="skill-category">Database</div></div>
-    <div class="skill-card"><div class="skill-icon">&#128452;</div><div class="skill-name">JDBC</div><div class="skill-category">Data Access</div></div>
-    <div class="skill-card"><div class="skill-icon">&#127917;</div><div class="skill-name">MVC &amp; Repository</div><div class="skill-category">Architecture</div></div>
+    <div class="skill-card"><div class="skill-icon">&#9783;</div><div class="skill-name">Sass</div><div class="skill-category">Preprocessor</div></div>
   </div>
 </section>
 
-<hr class="section-divider">
-
-<section class="projects-section" id="projects">
+<section class="projects-section panel" id="projects" tabindex="-1">
   <div class="section-header">
     <span class="section-label">Portfolio</span>
     <h2 class="section-title">Featured <span>Projects</span></h2>
@@ -271,7 +317,7 @@
           <span class="badge badge--individual">Individual</span>
           <span class="badge badge--featured">Featured</span>
         </div>
-        <div class="preview-icon">&#127912;</div>
+        <div class="preview-icon" aria-hidden="true">&#127912;</div>
       </div>
       <div class="card-content">
         <span class="card-label">Latest Project</span>
@@ -294,7 +340,7 @@
         <div class="contribution"><strong>My Contribution:</strong> Entire application — individual project built as final project for FemCoders Barcelona Bootcamp.</div>
         <div class="card-actions">
           <a href="https://github.com/rseidu941-commits/Code-Crafters" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             GitHub
           </a>
         </div>
@@ -307,7 +353,7 @@
           <span class="badge badge--individual">Individual</span>
           <span class="badge badge--featured">Featured</span>
         </div>
-        <div class="preview-icon">&#127807;</div>
+        <div class="preview-icon" aria-hidden="true">&#127807;</div>
       </div>
       <div class="card-content">
         <span class="card-label">Personal Project</span>
@@ -330,15 +376,13 @@
         <div class="contribution"><strong>My Contribution:</strong> Entire application — individual personal project.</div>
         <div class="card-actions">
           <a href="https://github.com/rseidu941-commits/eco-wear" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             GitHub
           </a>
         </div>
       </div>
     </article>
   </div>
-
-  <hr class="section-divider" style="margin:3rem 0">
 
   <div class="collab-header">
     <h2 class="collab-title">Collaborative Projects</h2>
@@ -349,7 +393,7 @@
     <article class="project-card project-card--collab">
       <div class="collab-card-preview">
         <div class="preview-badge"><span class="badge badge--collaborative">Collaborative</span></div>
-        <div class="collab-preview-icon">&#128302;</div>
+        <div class="collab-preview-icon" aria-hidden="true">&#128302;</div>
       </div>
       <div class="collab-card-content">
         <h3 class="collab-card-title">Contemporary Goddesses Tarot</h3>
@@ -358,10 +402,7 @@
         <div class="collab-card-contribution"><strong>My Contribution:</strong> Navbar, Footer, Header, History page</div>
         <ul class="collab-card-features"><li>Three-card tarot reading (past/present/future)</li><li>Card selection restricted to 3 cards</li><li>Reading interpretation with Contemporary Goddess</li><li>Reading history tracking</li><li>Responsive design</li></ul>
         <div class="collab-card-actions">
-          <a href="https://github.com/tarot-team2/tarot-project" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
+          <a href="https://github.com/tarot-team2/tarot-project" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub</a>
         </div>
       </div>
     </article>
@@ -369,7 +410,7 @@
     <article class="project-card project-card--collab">
       <div class="collab-card-preview">
         <div class="preview-badge"><span class="badge badge--collaborative">Collaborative</span></div>
-        <div class="collab-preview-icon">&#127916;</div>
+        <div class="collab-preview-icon" aria-hidden="true">&#127916;</div>
       </div>
       <div class="collab-card-content">
         <h3 class="collab-card-title">Cinephile</h3>
@@ -378,10 +419,7 @@
         <div class="collab-card-contribution"><strong>My Contribution:</strong> GitHub repo setup, Jira/Scrum board, Standard/VIP/Premium subscription cards</div>
         <ul class="collab-card-features"><li>Landing page with hero section &amp; stats</li><li>Movie catalog by themes (weekly Friday releases)</li><li>Pricing page with subscription plans</li><li>Contact form</li><li>Responsive design</li></ul>
         <div class="collab-card-actions">
-          <a href="https://github.com/Cinephile-Team-2/cinephile-project" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
+          <a href="https://github.com/Cinephile-Team-2/cinephile-project" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub</a>
         </div>
       </div>
     </article>
@@ -389,18 +427,15 @@
     <article class="project-card project-card--collab">
       <div class="collab-card-preview">
         <div class="preview-badge"><span class="badge badge--collaborative">Collaborative</span></div>
-        <div class="collab-preview-icon">&#129414;</div>
+        <div class="collab-preview-icon" aria-hidden="true">&#129414;</div>
       </div>
       <div class="collab-card-content">
         <h3 class="collab-card-title">DuckStoreF5</h3>
         <p class="collab-card-desc">Online premium rubber duck store built during the Factoria F5 &amp; FemCoders bootcamp. Evolves from static website to interactive application with functional cart and complete checkout.</p>
         <div class="collab-card-tech"><span class="collab-tech-tag">HTML5</span><span class="collab-tech-tag">CSS3 (BEM)</span><span class="collab-tech-tag">JavaScript</span><span class="collab-tech-tag">localStorage</span><span class="collab-tech-tag">Vitest</span></div>
         <ul class="collab-card-features"><li>Responsive landing page &amp; product catalog</li><li>Functional shopping cart with persistence</li><li>Complete checkout flow (Review, Payment, Success)</li><li>WCAG 2.1 AA accessibility</li><li>Modular JavaScript architecture</li></ul>
-<div class="collab-card-actions">
-          <a href="https://github.com/SiuzannaVach/DuckStoreF5" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
+        <div class="collab-card-actions">
+          <a href="https://github.com/SiuzannaVach/DuckStoreF5" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub</a>
         </div>
       </div>
     </article>
@@ -408,7 +443,7 @@
     <article class="project-card project-card--collab">
       <div class="collab-card-preview">
         <div class="preview-badge"><span class="badge badge--collaborative">Collaborative</span></div>
-        <div class="collab-preview-icon">&#128218;</div>
+        <div class="collab-preview-icon" aria-hidden="true">&#128218;</div>
       </div>
       <div class="collab-card-content">
         <h3 class="collab-card-title">Biblioteca Feminista</h3>
@@ -417,10 +452,7 @@
         <div class="collab-card-contribution"><strong>My Contribution:</strong> Add-book flow (controller &amp; view), PostgreSQL/JDBC database connection</div>
         <ul class="collab-card-features"><li>Full CRUD: view, add &amp; delete books</li><li>Search by title, author &amp; genre</li><li>MVC + Repository architecture</li><li>Cascading delete (book_author, book_genre)</li><li>Unit tested with JUnit 5 &amp; Mockito</li></ul>
         <div class="collab-card-actions">
-          <a href="https://github.com/Biblioteca-feminista-Team-2/feminist-library" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
+          <a href="https://github.com/Biblioteca-feminista-Team-2/feminist-library" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub</a>
         </div>
       </div>
     </article>
@@ -428,7 +460,7 @@
     <article class="project-card project-card--collab">
       <div class="collab-card-preview">
         <div class="preview-badge"><span class="badge badge--collaborative">Collaborative</span></div>
-        <div class="collab-preview-icon">&#11093;</div>
+        <div class="collab-preview-icon" aria-hidden="true">&#11093;</div>
       </div>
       <div class="collab-card-content">
         <h3 class="collab-card-title">Tic Tac Toe</h3>
@@ -437,19 +469,14 @@
         <div class="collab-card-contribution"><strong>My Contribution:</strong> Game validation logic, game definition, board printing</div>
         <ul class="collab-card-features"><li>Turn-based X/O gameplay</li><li>3x3 board with input validation</li><li>Win (horizontal, vertical, diagonal) detection</li><li>Draw detection</li><li>Unit tests with JUnit</li></ul>
         <div class="collab-card-actions">
-          <a href="https://github.com/TicTacToe-Team2/TicTacToe" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
+          <a href="https://github.com/TicTacToe-Team2/TicTacToe" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">GitHub</a>
         </div>
       </div>
     </article>
   </div>
 </section>
 
-<hr class="section-divider">
-
-<section class="section" id="contact">
+<section class="section panel" id="contact" tabindex="-1">
   <span class="section-label">Contact</span>
   <h2 class="section-title">Get in <span>touch</span></h2>
   <p class="section-subtitle">Have a question or want to work together? Feel free to reach out.</p>
@@ -459,105 +486,401 @@
       <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
       <div class="contact-links">
         <a href="mailto:rseidu941@gmail.com" class="contact-link">
-          <div class="contact-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="contact-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
           <div><div class="contact-link-text">rseidu941@gmail.com</div><div class="contact-link-label">Email</div></div>
         </a>
         <a href="https://www.linkedin.com/in/rukayatu-seidu-55b88a381/" target="_blank" rel="noopener noreferrer" class="contact-link">
-          <div class="contact-link-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+          <div class="contact-link-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
           <div><div class="contact-link-text">LinkedIn</div><div class="contact-link-label">Connect with me</div></div>
         </a>
         <a href="https://github.com/rseidu941-commits" target="_blank" rel="noopener noreferrer" class="contact-link">
-          <div class="contact-link-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></div>
+          <div class="contact-link-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></div>
           <div><div class="contact-link-text">GitHub</div><div class="contact-link-label">View my code</div></div>
         </a>
       </div>
     </div>
-    <form class="contact-form" onsubmit="event.preventDefault();alert('Message sent! (Demo)')">
-      <div class="form-group"><label for="name">Name</label><input type="text" id="name" placeholder="Your name"></div>
-      <div class="form-group"><label for="email">Email</label><input type="email" id="email" placeholder="your@email.com"></div>
-      <div class="form-group"><label for="message">Message</label><textarea id="message" placeholder="Your message..."></textarea></div>
-      <button type="submit" class="btn btn-primary" style="align-self:flex-start">Send Message</button>
+
+    <!-- FormSubmit.co — no API key or account required.
+         If JavaScript is disabled the browser posts straight to FormSubmit,
+         which shows its own thank-you page. With JS on, we intercept and use
+         their AJAX endpoint so the confirmation appears here instead. -->
+    <form class="contact-form" id="contactForm" method="POST" action="https://formsubmit.co/rseidu941@gmail.com" novalidate>
+      <input type="hidden" name="_subject" value="New message from your portfolio">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="form-group" id="group-name">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" autocomplete="name" required placeholder="Your name" aria-describedby="error-name">
+        <span class="field-error" id="error-name"></span>
+      </div>
+      <div class="form-group" id="group-email">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" required placeholder="your@email.com" aria-describedby="error-email">
+        <span class="field-error" id="error-email"></span>
+      </div>
+      <div class="form-group" id="group-message">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required placeholder="Your message..." aria-describedby="error-message"></textarea>
+        <span class="field-error" id="error-message"></span>
+      </div>
+
+      <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
+      <button type="submit" class="btn btn-primary" id="submitBtn">
+        <span class="btn-spinner" aria-hidden="true"></span>
+        <span class="btn-text">Send Message</span>
+      </button>
     </form>
   </div>
 </section>
+
+</main>
 
 <footer class="footer">
   <div class="footer-content">
     <p class="footer-text">&copy; 2026 Rukayatu Seidu. All rights reserved.</p>
     <div class="footer-social">
-      <a href="https://www.linkedin.com/in/rukayatu-seidu-55b88a381/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-      <a href="https://github.com/rseidu941-commits" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-      <a href="mailto:rseidu941@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      <a href="https://www.linkedin.com/in/rukayatu-seidu-55b88a381/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      <a href="https://github.com/rseidu941-commits" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+      <a href="mailto:rseidu941@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
     </div>
   </div>
 </footer>
 
 <script>
-const canvas=document.getElementById('constellation');
-const ctx=canvas.getContext('2d');
-let particles=[];
-function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-window.addEventListener('resize',resize);resize();
-class Particle{
-  constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.vx=(Math.random()-0.5)*0.5;this.vy=(Math.random()-0.5)*0.5;this.radius=Math.random()*2+1}
-  update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1}
-  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);ctx.fillStyle='rgba(162,155,254,0.6)';ctx.fill()}
-}
-for(let i=0;i<80;i++)particles.push(new Particle());
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{p.update();p.draw()});
-  for(let i=0;i<particles.length;i++){
-    for(let j=i+1;j<particles.length;j++){
-      const dx=particles[i].x-particles[j].x;
-      const dy=particles[i].y-particles[j].y;
-      const dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<150){
-        ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);
-        ctx.strokeStyle='rgba(108,92,231,'+(0.15*(1-dist/150))+')';ctx.lineWidth=0.5;ctx.stroke();
+/* ============================ PANEL ROUTER ============================ */
+(function () {
+  'use strict';
+
+  var PANEL_IDS = ['hero', 'about', 'skills', 'projects', 'contact'];
+  var panels    = {};
+  PANEL_IDS.forEach(function (id) { panels[id] = document.getElementById(id); });
+
+  var navLinks   = Array.prototype.slice.call(document.querySelectorAll('[data-goto]'));
+  var navList    = document.getElementById('navLinks');
+  var navToggle  = document.getElementById('navToggle');
+  var homeButton = document.getElementById('homeButton');
+  var heroCanvas = panels.hero;
+  var current    = null;
+
+  function readHash() {
+    var id = location.hash.replace(/^#/, '').toLowerCase();
+    return PANEL_IDS.indexOf(id) !== -1 ? id : 'hero';
+  }
+
+  function setActive(id) {
+    if (id === current) return;
+    current = id;
+
+    PANEL_IDS.forEach(function (pid) {
+      if (!panels[pid]) return;
+      panels[pid].classList.toggle('is-active', pid === id);
+      if (pid === id) {
+        panels[pid].removeAttribute('aria-hidden');
+        panels[pid].removeAttribute('inert');
+      } else {
+        panels[pid].setAttribute('aria-hidden', 'true');
+        panels[pid].setAttribute('inert', '');
+      }
+    });
+
+    // nav highlight
+    navLinks.forEach(function (link) {
+      var isCurrent = link.getAttribute('data-goto') === id && link.closest('ul');
+      if (isCurrent) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+      }
+    });
+
+    // pause the constellation animation whenever the hero is not on screen
+    if (window.__constellation) window.__constellation.setRunning(id === 'hero');
+
+    document.title = id === 'hero'
+      ? 'Rukayatu Seidu — Junior Front-End Developer'
+      : id.charAt(0).toUpperCase() + id.slice(1) + ' · Rukayatu Seidu';
+  }
+
+  function goTo(id, push) {
+    if (PANEL_IDS.indexOf(id) === -1) id = 'hero';
+    setActive(id);
+    if (push) {
+      try {
+        var target = id === 'hero' ? location.pathname : '#' + id;
+        history.pushState({ panel: id }, '', target);
+      } catch (err) {
+        // file:// preview or restricted host — fall back to the plain hash
+        if (id === 'hero') location.hash = '';
+        else location.hash = id;
       }
     }
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    // move focus to the new panel for keyboard / screen-reader users
+    if (panels[id]) panels[id].focus({ preventScroll: true });
   }
-  requestAnimationFrame(animate);
-}
-animate();
 
-document.getElementById('navToggle').addEventListener('click',function(){document.getElementById('navLinks').classList.toggle('active')});
-
-const sections=['about','skills','projects','contact'];
-const navLinks=document.querySelectorAll('.nav-links a');
-const sectionElements=document.querySelectorAll('.section, .projects-section');
-const dividers=document.querySelectorAll('.section-divider');
-
-function showSection(id){
-  const el=document.getElementById(id);
-  if(el){el.classList.add('visible');
-    const idx=sections.indexOf(id);
-    dividers.forEach((d,i)=>{if(i<idx)d.classList.add('visible')});
+  function closeMenu() {
+    if (!navList) return;
+    navList.classList.remove('open');
+    if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
   }
-}
 
-navLinks.forEach(link=>{
-  link.addEventListener('click',function(e){
-    e.preventDefault();
-    const target=this.getAttribute('href').replace('#','');
-    showSection(target);
-    document.getElementById(target).scrollIntoView({behavior:'smooth',block:'start'});
-    document.getElementById('navLinks').classList.remove('active');
+  // every element carrying data-goto navigates to that panel
+  navLinks.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      goTo(link.getAttribute('data-goto'), true);
+      closeMenu();
+    });
   });
-});
 
-document.querySelector('.hero-buttons .btn-primary').addEventListener('click',function(e){
-  e.preventDefault();
-  showSection('contact');
-  document.getElementById('contact').scrollIntoView({behavior:'smooth',block:'start'});
-});
+  if (homeButton) {
+    homeButton.addEventListener('click', function () {
+      goTo('hero', true);
+      closeMenu();
+    });
+  }
 
-document.querySelector('.hero-buttons .btn-outline').addEventListener('click',function(e){
-  e.preventDefault();
-  showSection('projects');
-  document.getElementById('projects').scrollIntoView({behavior:'smooth',block:'start'});
-});
+  if (navToggle) {
+    navToggle.addEventListener('click', function () {
+      var open = navList.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  // browser back / forward
+  window.addEventListener('popstate', function () { goTo(readHash(), false); });
+  window.addEventListener('hashchange', function () { goTo(readHash(), false); });
+
+  // initial render — respects a deep link like /#projects
+  setActive(readHash());
+  window.scrollTo(0, 0);
+})();
+
+/* ======================= CONSTELLATION BACKGROUND ===================== */
+(function () {
+  'use strict';
+
+  var canvas = document.getElementById('constellation');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var particles = [];
+  var running = false;
+  var rafId = null;
+  var w = 0, h = 0;
+
+  function resize() {
+    w = canvas.clientWidth  || window.innerWidth;
+    h = canvas.clientHeight || window.innerHeight;
+    canvas.width  = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function Particle() {
+    this.x = Math.random() * w;
+    this.y = Math.random() * h;
+    this.vx = (Math.random() - 0.5) * 0.5;
+    this.vy = (Math.random() - 0.5) * 0.5;
+    this.radius = Math.random() * 2 + 1;
+  }
+  Particle.prototype.update = function () {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < 0 || this.x > w) this.vx *= -1;
+    if (this.y < 0 || this.y > h) this.vy *= -1;
+  };
+  Particle.prototype.draw = function () {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(162,155,254,0.6)';
+    ctx.fill();
+  };
+
+  function seed() {
+    particles = [];
+    for (var i = 0; i < 80; i++) particles.push(new Particle());
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(function (p) { p.update(); p.draw(); });
+    for (var i = 0; i < particles.length; i++) {
+      for (var j = i + 1; j < particles.length; j++) {
+        var dx = particles[i].x - particles[j].x;
+        var dy = particles[i].y - particles[j].y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(108,92,231,' + (0.15 * (1 - dist / 150)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (running || reduceMotion) return;
+    running = true;
+    rafId = requestAnimationFrame(frame);
+  }
+  function stop() {
+    running = false;
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  }
+
+  window.addEventListener('resize', function () { resize(); seed(); });
+
+  resize();
+  seed();
+  if (!reduceMotion) start();
+
+  window.__constellation = {
+    setRunning: function (on) { on ? start() : stop(); }
+  };
+})();
+
+/* =========================== CONTACT FORM ============================= */
+(function () {
+  'use strict';
+
+  var form   = document.getElementById('contactForm');
+  if (!form) return;
+
+  var status   = document.getElementById('formStatus');
+  var submitBtn = document.getElementById('submitBtn');
+  var btnText  = submitBtn.querySelector('.btn-text');
+
+  // ---- Configuration -------------------------------------------------
+  // FormSubmit.co requires NO API key and NO account — just this address.
+  // One-time activation: the first submission emails YOU a link to confirm.
+  // Everything after that arrives automatically at this inbox.
+  var DELIVERY_EMAIL = 'rseidu941@gmail.com';
+  var AJAX_ENDPOINT  = 'https://formsubmit.co/ajax/' + DELIVERY_EMAIL;
+  // --------------------------------------------------------------------
+
+  var fields = {
+    name:    { el: document.getElementById('name'),    group: document.getElementById('group-name'),    error: document.getElementById('error-name') },
+    email:   { el: document.getElementById('email'),   group: document.getElementById('group-email'),   error: document.getElementById('error-email') },
+    message: { el: document.getElementById('message'), group: document.getElementById('group-message'), error: document.getElementById('error-message') }
+  };
+
+  function setError(field, msg) {
+    field.error.textContent = msg || '';
+    field.group.classList.toggle('has-error', !!msg);
+    field.el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  }
+
+  function validate() {
+    var ok = true;
+
+    if (!fields.name.el.value.trim()) {
+      setError(fields.name, 'Please enter your name.'); ok = false;
+    } else setError(fields.name, '');
+
+    var email = fields.email.el.value.trim();
+    if (!email) {
+      setError(fields.email, 'Please enter your email address.'); ok = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      setError(fields.email, 'Please enter a valid email address.'); ok = false;
+    } else setError(fields.email, '');
+
+    if (fields.message.el.value.trim().length < 5) {
+      setError(fields.message, 'Please write a message of at least 5 characters.'); ok = false;
+    } else setError(fields.message, '');
+
+    return ok;
+  }
+
+  function showStatus(msg, type) {
+    status.textContent = msg;
+    status.className = 'form-status is-' + type;
+  }
+  function clearStatus() {
+    status.textContent = '';
+    status.className = 'form-status';
+  }
+
+  // clear a field's error as soon as the visitor starts fixing it
+  Object.keys(fields).forEach(function (k) {
+    fields[k].el.addEventListener('input', function () {
+      if (fields[k].group.classList.contains('has-error')) validate();
+    });
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearStatus();
+
+    if (!validate()) {
+      showStatus('Please fix the highlighted fields and try again.', 'error');
+      var firstBad = form.querySelector('.has-error input, .has-error textarea');
+      if (firstBad) firstBad.focus();
+      return;
+    }
+
+    var name      = fields.name.el.value.trim();
+    var email     = fields.email.el.value.trim();
+    var message   = fields.message.el.value.trim();
+    var firstName = name.split(' ')[0] || name;
+
+    submitBtn.disabled = true;
+    submitBtn.classList.add('is-loading');
+    btnText.textContent = 'Sending…';
+
+    fetch(AJAX_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        message: message,
+        _subject: 'Portfolio message from ' + name,
+        _template: 'table',
+        _captcha: 'false',
+        _honey: ''
+      })
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          return { ok: res.ok, data: data };
+        });
+      })
+      .then(function (r) {
+        // FormSubmit reports success as the STRING "true"
+        var sent = r.data && (r.data.success === true || r.data.success === 'true');
+        if (r.ok && sent) {
+          form.reset();
+          showStatus('Thank you, ' + firstName + '! Your message has been sent — I will get back to you soon.', 'success');
+        } else {
+          showStatus((r.data && r.data.message) || ('Something went wrong. Please email me directly at ' + DELIVERY_EMAIL + '.'), 'error');
+        }
+      })
+      .catch(function () {
+        showStatus('Network problem — the message could not be sent. Please email me directly at ' + DELIVERY_EMAIL + '.', 'error');
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('is-loading');
+        btnText.textContent = 'Send Message';
+      });
+  });
+})();
 </script>
 
 </body>
